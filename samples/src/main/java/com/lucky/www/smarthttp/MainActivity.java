@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         mBtGet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                get();
+                get();//get
             }
         });
 
