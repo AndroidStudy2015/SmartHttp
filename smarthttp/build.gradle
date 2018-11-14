@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.AndroidStudy2015'
 android {
 
     compileSdkVersion 28
@@ -6,7 +9,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField "boolean", "isPrintLog", "${isPrintLog}"//是否输出LOG信息
         buildConfigField "int", "serverUrlType", "${serverUrlType}"// 服务器地址类型：1-本地 2-公测 3-生产
@@ -19,18 +22,18 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            //重命名aar名称
-            android.libraryVariants.all { variant ->
-                if (variant.name.equalsIgnoreCase("release")) {
-                    variant.outputs.all { output ->
-                        def f = output.outputFileName
-                        if (f != null && f.endsWith('.aar')) {
-                            def fileName = "smarthttp-${variant.name}-v${defaultConfig.versionName}.aar"
-                            output.outputFileName = fileName
-                        }
-                    }
-                }
-            }
+//            //重命名aar名称
+//            android.libraryVariants.all { variant ->
+//                if (variant.name.equalsIgnoreCase("release")) {
+//                    variant.outputs.all { output ->
+//                        def f = output.outputFileName
+//                        if (f != null && f.endsWith('.aar')) {
+//                            def fileName = "smarthttp-${variant.name}-v${defaultConfig.versionName}.aar"
+//                            output.outputFileName = fileName
+//                        }
+//                    }
+//                }
+//            }
         }
 
     }
