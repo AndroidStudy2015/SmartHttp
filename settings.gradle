@@ -1,1 +1,1 @@
-include ':samples', ':smarthttp'
+include ':samples', ':smarthttp', ':testlibrary'
