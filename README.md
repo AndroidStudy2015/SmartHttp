@@ -17,21 +17,63 @@ allprojects {
 
 ```
 dependencies {
-	        implementation 'com.github.AndroidStudy2015:SmartHttp:1.0.0'
+	        implementation 'com.github.AndroidStudy2015:SmartHttp:lastest-version'
 	}
 ```
 
-### 注意
+### 使用
 ```
--------------------服务器地址切换-------------------
- 服务器地址类型：1-本地 2-公测 3-生产
-serverUrlType=3
-# 本地环境url-1
-LocalBeatUrl="http://www.xxx.com";
-# 公测环境url-2
-OpenBeatUrl="http://www.xxx.com";
-# 生产环境url-3
-ProductionUrl="http://www.xxx.com";
-# 控制log打印
-isPrintLog=true
+
+public class MyApp extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        LoggerUtil.LEVEL = LoggerUtil.INFO;//控制调试信息log打印
+        SmartHttp.init()//必须先初始化
+                .baseUrl("http://tcc.taobao.com")
+                .config();
+    }
+
+
+
+  private void get() {
+        WeakHashMap<String, Object> params = new WeakHashMap<>();
+        params.put("tel", "13912345678");
+        String url = "/cc/json/mobile_tel_segment.htm";
+
+        SmartHttp.with(this)
+                .url(url)
+                .params(params)
+                .get(new SmartCallBack() {
+                    @Override
+                    public void onSuccess(String response) {
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+
+                    }
+
+
+                    @Override
+                    public void onError(int code, String msg) {
+
+                    }
+
+                    @Override
+                    public void onRequestStart() {
+                        super.onRequestStart();
+                        LoggerUtil.e("ccc", "onRequestStart");
+
+                    }
+
+                    @Override
+                    public void onRequestEnd() {
+                        super.onRequestEnd();
+                        LoggerUtil.e("ccc", "onRequestEnd");
+
+                    }
+                });
+    }
+}
 ```
