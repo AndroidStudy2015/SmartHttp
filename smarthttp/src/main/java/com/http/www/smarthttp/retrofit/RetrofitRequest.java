@@ -1,11 +1,12 @@
 package com.http.www.smarthttp.retrofit;
 
+import android.content.Context;
+
 import com.http.www.smarthttp.base.HttpMethod;
 import com.http.www.smarthttp.base.ISmartRequest;
 import com.http.www.smarthttp.base.SmartCallBack;
 import com.http.www.smarthttp.base.SmartConfig;
 import com.http.www.smarthttp.base.SmartDownloadCallBack;
-import com.http.www.smarthttp.base.SmartHttp;
 import com.http.www.smarthttp.retrofit.download.DownloadHandler;
 import com.http.www.smarthttp.utils.DebugUtil;
 import com.http.www.smarthttp.utils.LoggerUtil;
@@ -20,7 +21,8 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 
 public class RetrofitRequest implements ISmartRequest {
-    private final APIService mApiService = RetrofitCreator.apiService;
+    private APIService mApiService;
+    private Context mContext;
     private Call<String> call;
     private String mUrl;
     private WeakHashMap<String, Object> mParams;
@@ -29,6 +31,10 @@ public class RetrofitRequest implements ISmartRequest {
     private String mDownloadFileName;//下载的文件名
     private String mDownDir;//下载文件存储的目录
 
+    public RetrofitRequest(Context context, APIService apiService) {
+        this.mContext=context;
+        this.mApiService = apiService;
+    }
 
     @Override
     public ISmartRequest url(String url) {
@@ -93,7 +99,7 @@ public class RetrofitRequest implements ISmartRequest {
 
 
     private void execute(HttpMethod method, SmartCallBack smartCallBack) {
-        if (!NetworkUtil.isNetworkAvailable(SmartHttp.sContext)) {
+        if (!NetworkUtil.isNetworkAvailable(mContext)) {
             LoggerUtil.e("RetrofitRequest", "没连接到网络");
             return;
         }
@@ -131,6 +137,6 @@ public class RetrofitRequest implements ISmartRequest {
         if (call != null) {
             call.enqueue(new RetrofitCallBack(smartCallBack));
         }
-        DebugUtil.printUrlAndParams(mParams, SmartConfig.baseUrl, mUrl);
+        DebugUtil.printUrlAndParams(mParams, SmartConfig.getInstance().getBaseUrl(), mUrl);
     }
 }

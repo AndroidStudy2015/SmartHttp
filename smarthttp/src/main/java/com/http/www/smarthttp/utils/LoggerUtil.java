@@ -1,8 +1,5 @@
 package com.http.www.smarthttp.utils;
 
-import android.util.Log;
-
-import com.http.www.smarthttp.BuildConfig;
 import com.orhanobut.logger.Logger;
 
 /**
@@ -11,22 +8,17 @@ import com.orhanobut.logger.Logger;
 
 public final class LoggerUtil {
 
-    private static final int VERBOSE = 1;
-    private static final int DEBUG = 2;
-    private static final int INFO = 3;
-    private static final int WARN = 4;
-    private static final int ERROR = 5;
-    private static final int NOTHING = 6;
+
+    public static final int VERBOSE = 1;
+    public static final int DEBUG = 2;
+    public static final int INFO = 3;
+    public static final int WARN = 4;
+    public static final int ERROR = 5;
+    public static final int NOTHING = 6;
 
     //控制log等级
-    public static int LEVEL = ERROR;
+    public static int LEVEL = VERBOSE;
 
-    static {
-        if (!BuildConfig.isPrintLog) {
-            LEVEL = NOTHING;
-            Log.e("ccc","++++++++++"+LEVEL);
-        }
-    }
 
     public static void v(String tag, String message) {
         if (LEVEL <= VERBOSE) {

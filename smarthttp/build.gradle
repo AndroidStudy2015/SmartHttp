@@ -11,11 +11,7 @@ android {
         versionCode 1
         versionName "1.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        buildConfigField "boolean", "isPrintLog", "${isPrintLog}"//是否输出LOG信息
-        buildConfigField "int", "serverUrlType", "${serverUrlType}"// 服务器地址类型：1-本地 2-公测 3-生产
-        buildConfigField "String", "LocalBeatUrl", "${LocalBeatUrl}"// 1-本地
-        buildConfigField "String", "OpenBeatUrl", "${OpenBeatUrl}"// 2-公测
-        buildConfigField "String", "ProductionUrl", "${ProductionUrl}"//  3-生产
+       
 
     }
     buildTypes {

@@ -15,16 +15,28 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mBtGet;
     private Button mBtDownLoad;
+    private Button bt_test_download;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mBtGet = (Button) findViewById(R.id.bt_test_get);
+        bt_test_download = (Button) findViewById(R.id.bt_test_download);
 
         mBtGet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                get();//get
+
+            }
+        });
+
+        bt_test_download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
                 get();//get
             }
         });
@@ -33,9 +45,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void get() {
-//        http://tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel=手机号
         WeakHashMap<String, Object> params = new WeakHashMap<>();
-        params.put("tel", "13512345678");
+        params.put("tel", "13912345678");
         String url = "/cc/json/mobile_tel_segment.htm";
 
         SmartHttp.with(this)
