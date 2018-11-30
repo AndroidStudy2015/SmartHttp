@@ -1,16 +1,14 @@
 package com.http.www.smarthttp.base;
 
-import android.content.Context;
-
 import com.http.www.smarthttp.retrofit.RetrofitCreator;
 import com.http.www.smarthttp.retrofit.RetrofitRequest;
 
 public class SmartHttp {
     public static boolean IS_CONGIG_FINISHED = false;
 
-    public static ISmartRequest with(Context context) {
+    public static ISmartRequest with() {
         if (IS_CONGIG_FINISHED) {
-            return new RetrofitRequest(context, RetrofitCreator.apiService);
+            return new RetrofitRequest( RetrofitCreator.apiService);
         } else {
             throw new RuntimeException(
                     "\n******************请调用******************\n" +

@@ -18,6 +18,9 @@ public class RetrofitCallBack implements Callback<String> {
     public void onResponse(Call<String> call, Response<String> response) {
 
         if (response.isSuccessful()) {
+            // isSuccessful() 方法的 HTTP 状态码 是 200 到 300之间，
+            // 在这之间都算是请求成功,并且在正常情况下只有 200 的时候后台才会返回数据，其他是没有数据的,
+            // 所以更严格讲话，应该是(200 == response.code();
             if (call.isExecuted()) {
                 if (mSmartCallBack != null) {
                     mSmartCallBack.onSuccess(response.body());

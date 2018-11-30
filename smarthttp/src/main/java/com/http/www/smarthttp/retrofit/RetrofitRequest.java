@@ -32,7 +32,11 @@ public class RetrofitRequest implements ISmartRequest {
     private String mDownDir;//下载文件存储的目录
 
     public RetrofitRequest(Context context, APIService apiService) {
-        this.mContext=context;
+        this.mContext = context;
+        this.mApiService = apiService;
+    }
+
+    public RetrofitRequest(APIService apiService) {
         this.mApiService = apiService;
     }
 
@@ -99,11 +103,12 @@ public class RetrofitRequest implements ISmartRequest {
 
 
     private void execute(HttpMethod method, SmartCallBack smartCallBack) {
-        if (!NetworkUtil.isNetworkAvailable(mContext)) {
-            LoggerUtil.e("RetrofitRequest", "没连接到网络");
-            return;
+        if (mContext != null) {
+            if (!NetworkUtil.isNetworkAvailable(mContext)) {
+                LoggerUtil.e("RetrofitRequest", "没连接到网络");
+                return;
+            }
         }
-
         if (mUrl == null) {
             throw new RuntimeException("************请指定url************");
         }
